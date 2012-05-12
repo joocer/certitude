@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83ACB39D-A099-46FB-BD93-FD3585939F2F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Certitude</RootNamespace>
+    <AssemblyName>Certitude</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.5.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.5.4\Assemblies\v4.0\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="API\NotificationServices.asmx" />
+    <Content Include="Services\Configuration\sample.xml" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API\Helpers.cs" />
+    <Compile Include="Controllers\Controller.cs" />
+    <Compile Include="Controllers\EvaluationController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Models\EvaluationModel.cs" />
+    <Compile Include="Models\IModel.cs" />
+    <Compile Include="Models\IResponse.cs" />
+    <Compile Include="Models\NotificationModel.cs" />
+    <Compile Include="Models\ServiceOutcomes.cs" />
+    <Compile Include="Models\ServiceResponse.cs" />
+    <Compile Include="Results\ActionResult.cs" />
+    <Compile Include="Results\ActionResultDisplayNotification.cs" />
+    <Compile Include="Results\ActionResultNotAuthorized.cs" />
+    <Compile Include="Results\ActionResultDisplayEvaluation.cs" />
+    <Compile Include="Results\ActionResultInvalidRequest.cs" />
+    <Compile Include="Results\ActionResultFatalError.cs" />
+    <Compile Include="API\NotificationServices.asmx.cs">
+      <DependentUpon>NotificationServices.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Configuration\AESCryptoProvider.cs" />
+    <Compile Include="Services\Configuration\IConfigurationService.cs" />
+    <Compile Include="Services\Configuration\RegistryConfigurationProvider.cs" />
+    <Compile Include="Services\Configuration\XmlConfigurationProvider.cs" />
+    <Compile Include="Services\Database\IDatabaseResource.cs" />
+    <Compile Include="Services\Database\MySqlDatabaseResourceAgent.cs" />
+    <Compile Include="Services\Identity\IdentityAgent.cs" />
+    <Compile Include="Services\Identity\IdentityService.cs" />
+    <Compile Include="Services\Logging\DatabaseLoggingAgent.cs" />
+    <Compile Include="Services\Logging\EventLogLoggingAgent.cs" />
+    <Compile Include="Services\Logging\ILoggingService.cs" />
+    <Compile Include="Services\MapReduce\IMapReduceService.cs" />
+    <Compile Include="Services\MapReduce\MapReduceProxy.cs" />
+    <Compile Include="Services\Monitoring\IMonitorService.cs" />
+    <Compile Include="Services\Monitoring\MonitorAgent.cs" />
+    <Compile Include="Services\ServiceFactory.cs" />
+    <Compile Include="Services\Time\ITimeService.cs" />
+    <Compile Include="Services\Time\TimeAgent.cs" />
+    <Compile Include="Services\Validation\Attributes\RequiredAttribute.cs" />
+    <Compile Include="Services\Validation\Attributes\StringLengthAttribute.cs" />
+    <Compile Include="Services\Validation\Attributes\ValidationAttribute.cs" />
+    <Compile Include="Services\Validation\Attributes\WhiteListAttribute.cs" />
+    <Compile Include="Services\Validation\IValidationService.cs" />
+    <Compile Include="Services\Validation\ValidationAgent.cs" />
+    <Compile Include="Views\FatalErrorView.cs" />
+    <Compile Include="Views\InvalidRequestView.cs" />
+    <Compile Include="Views\EvaluationView.cs" />
+    <Compile Include="Views\IView.cs" />
+    <Compile Include="Views\NotAuthorizedView.cs" />
+    <Compile Include="Views\NotificationView.cs" />
+    <Compile Include="Views\ViewHelpers.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>20024</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
