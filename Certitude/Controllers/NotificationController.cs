@@ -1,7 +1,10 @@
-﻿using Certitude.Results;
+﻿using System;
+using System.Linq;
+using Certitude.Results;
 using Certitude.Views;
 using Certitude.Models;
 using Certitude.Services;
+using Infrastructure.Resources;
 
 namespace Certitude.Controllers
 {
@@ -16,8 +19,49 @@ namespace Certitude.Controllers
         protected override ActionResult DoService(IModel model, string traceID)
         {
             // execute a save on map/reduce engine, one per customer identifier
-            // TODO: this is IoC, not DI
-            ServiceResponse response = ServiceFactory.MapReduceService.NotificationService(model, traceID);
+            ServiceResponse response = new ServiceResponse { Outcome = ServiceOutcomes.Success };
+
+            NotificationModel notification = (NotificationModel)model;
+            int records = 0;
+
+            if (notification.SubjectIdentifiers.Any())
+            {
+                foreach (string customer in notification.SubjectIdentifiers)
+                {
+                    records += ResourceContainer.Database
+                       .ExecuteNonQuery(
+                           "events",
+                           "INSERT INTO t_events (TimeStamp, TraceID, ClientID, EventType, SubjectID, DataValue, DataType, DetectedBy) VALUES('{0}', UNHEX('{1}'), UNHEX('{2}'), '{3}', '{4}', '{5}', '{6}', UNHEX(CRC32('{7}')));",
+                           ResourceContainer.Clock.TimeStamp(ResourceContainer.Clock.Now()),
+                           traceID,
+                           notification.ClientID,
+                           notification.EventType,
+                           customer,
+                           notification.DataValue,
+                           notification.DataType,
+                           notification.DetectedBy
+                           );
+                }
+            }
+            else
+            {
+                records += ResourceContainer.Database
+                   .ExecuteNonQuery(
+                       "events",
+                       "INSERT INTO t_events (TimeStamp, TraceID, ClientID, EventType, SubjectID, DataValue, DataType, DetectedBy) VALUES('{0}', UNHEX('{1}'), UNHEX('{2}'), '{3}', '{4}', '{5}', '{6}', UNHEX(CRC32('{7}')));",
+                       ResourceContainer.Clock.TimeStamp(ResourceContainer.Clock.Now()),
+                       traceID,
+                       notification.ClientID,
+                       notification.EventType,
+                       string.Empty,
+                       notification.DataValue,
+                       notification.DataType,
+                       notification.DetectedBy
+                       );
+            }
+
+
+            response.AddFlag(String.Format("{0} of {1} notifications created", records, notification.SubjectIdentifiers.Any() ? notification.SubjectIdentifiers.Count() : 1));
 
             if (response.Outcome == ServiceOutcomes.Failure)
             {
@@ -26,6 +70,7 @@ namespace Certitude.Controllers
 
             // return the result
             return new ActionResultDisplayNotification(model, new NotificationView(response.Flags));
+
         }
     }
 }

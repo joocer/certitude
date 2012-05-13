@@ -6,6 +6,7 @@ using Certitude.Results;
 using Certitude.Models;
 using Certitude.Services;
 using Certitude.Services.Identity;
+using Infrastructure.Resources;
 
 namespace Certitude.API
 {
@@ -29,8 +30,7 @@ namespace Certitude.API
             )
         {
             // monitoring
-            // TODO: this is IoC, not DI
-            ServiceFactory.MonitorService.IncrementCounter("Notification API Requests");
+            ResourceContainer.Monitor.IncrementCounter("Notification API Requests");
 
             // create model
             NotificationModel notificationModel = new NotificationModel
@@ -45,6 +45,10 @@ namespace Certitude.API
             if (!string.IsNullOrEmpty(subjectIdentifiers))
             {
                 notificationModel.SubjectIdentifiers = subjectIdentifiers.Split(',');
+            }
+            else
+            {
+                notificationModel.SubjectIdentifiers = new string[0];
             }
 
             // execute
@@ -63,8 +67,7 @@ namespace Certitude.API
             )
         {
             // monitoring
-            // TODO: this is IoC, not DI
-            ServiceFactory.MonitorService.IncrementCounter("Evaluation API Requests");
+            ResourceContainer.Monitor.IncrementCounter("Evaluation API Requests");
 
             // create model
             EvaluationModel evaluationModel = new EvaluationModel

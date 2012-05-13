@@ -7,6 +7,7 @@ using Certitude.Views;
 using Certitude.Models;
 using Certitude.Services;
 using Certitude.Services.Identity;
+using Infrastructure.Resources;
 
 namespace Certitude.Controllers
 {
@@ -19,10 +20,7 @@ namespace Certitude.Controllers
             #region killer questions
             // validate
             IEnumerable<string> validationResults;
-// ReSharper disable ConditionIsAlwaysTrueOrFalse
-            // TODO: this is IoC, not DI
-            if (actionResult == null && !ServiceFactory.ValidationService.Validate(model, out validationResults))
-// ReSharper restore ConditionIsAlwaysTrueOrFalse
+            if (!ServiceFactory.ValidationService.Validate(model, out validationResults))
             {
                 actionResult = new ActionResultInvalidRequest(null, new InvalidRequestView(validationResults));
             }
@@ -45,21 +43,19 @@ namespace Certitude.Controllers
             catch (Exception exception)
             {
                 // unhandled exception
-                // TODO: this is IoC, not DI
-                ServiceFactory.LoggingService.WriteException(exception, identity, traceID);
+                ResourceContainer.Logs.WriteException(exception, traceID);
                 actionResult = new ActionResultFatalError(model, new FatalErrorView(exception));
             }
             #endregion
 
             #region logging - for reporting and billing
-            // TODO: this is IoC, not DI
-            ServiceFactory.LoggingService.WriteAudit(CreateAudit(model, this, actionResult), identity, traceID);
+            ResourceContainer.Logs.WriteAudit(CreateAudit(model, this, actionResult, identity), traceID);
             #endregion
 
             return actionResult;
         }
 
-        private static string CreateAudit(IModel model, Controller controller, ActionResult result)
+        private static string CreateAudit(IModel model, Controller controller, ActionResult result, IdentityService identity)
         {
             // set up the writer
             StringBuilder stringBuilder = new StringBuilder();
@@ -69,6 +65,9 @@ namespace Certitude.Controllers
             // start the document
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("audit");
+
+            // identity information
+            xmlWriter.WriteAttributeString("identity", identity.Identity);
 
             // model information
             xmlWriter.WriteAttributeString("model", model.GetType().Name);

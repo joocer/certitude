@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using Infrastructure.Resources;
 
 namespace Certitude.Services.Identity
 {
@@ -22,8 +23,10 @@ namespace Certitude.Services.Identity
             return true;
 
             // get the password from the database
-            // TODO: this is IoC, not DI
-            string password = ServiceFactory.DatabaseResource.ExecuteNonQuery("authorization", "SELECT secret FROM t_credentials WHERE ClientID = '{0}'", Identity).ToString();
+            string password =
+                ResourceContainer.Database.ExecuteScalar("authorization",
+                                                           "CALL sp_GetClientSecret('{0}')",
+                                                           Identity) as string;
 
             // hash
             string hash = ComputeHash(Identity, password, new SHA256CryptoServiceProvider());

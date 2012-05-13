@@ -2,7 +2,6 @@
 using System.Text;
 using System.Xml;
 using Certitude.API;
-using Certitude.API;
 
 namespace Certitude.Views
 {
