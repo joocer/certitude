@@ -15,9 +15,8 @@ namespace Certitude.Rules
 
         public string Execute(string notification)
         {
-            //string sql = string.Format("SELECT DataValue FROM t_events WHERE TraceID = UNHEX('{0}')", notification);
-            string sql = string.Format("CALL sp_GetNotificationValue('{0}')", notification);
-
+            string sql = string.Format("SELECT DataValue FROM t_events WHERE TraceID = UNHEX('{0}') LIMIT 1", notification);
+ 
             string value = ResourceContainer.Database.ExecuteScalar("events", sql) as string;
 
             Single s;

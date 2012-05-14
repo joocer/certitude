@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS `ce_events`.`t_events`;
+CREATE TABLE  `ce_events`.`t_events` (
+  `GUID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `TraceID` binary(16) NOT NULL,
+  `EventType` char(32) NOT NULL,
+  `SubjectID` char(32) NOT NULL,
+  `DataValue` char(32) DEFAULT NULL,
+  `DataType` char(3) DEFAULT NULL,
+  `TimeStamp` datetime NOT NULL,
+  `ClientID` binary(16) NOT NULL,
+  `DetectedBy` binary(8) NOT NULL,
+  PRIMARY KEY (`GUID`)
+) ENGINE=MyISAM DEFAULT CHARSET=binary PACK_KEYS=1 ROW_FORMAT=FIXED;

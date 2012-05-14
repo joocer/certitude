@@ -19,14 +19,18 @@ namespace Certitude.Services.Identity
             // this works by retrieving the client's password from the database we do a SHA256 hash 
             // on clientID + password to see if it matches the authenticationKey
 
-            //TODO: fix this
-            return true;
-
             // get the password from the database
-            string password =
+            var passwordBytes =
                 ResourceContainer.Database.ExecuteScalar("authorization",
                                                            "CALL sp_GetClientSecret('{0}')",
-                                                           Identity) as string;
+                                                           Identity) as byte[];
+
+            // if we don't have a response, fail
+            if (passwordBytes == null || passwordBytes.Length == 0)
+            {
+                return false;
+            }
+            string password = new UTF8Encoding().GetString(passwordBytes);
 
             // hash
             string hash = ComputeHash(Identity, password, new SHA256CryptoServiceProvider());

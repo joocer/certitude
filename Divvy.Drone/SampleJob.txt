@@ -1,0 +1,14 @@
+﻿using System;
+
+namespace Divvy.Platform
+{
+    public class Task : BaseTask
+    {
+        public override string DoService(string input)
+        {
+		    System.Threading.Thread.Sleep(100);
+            System.Console.WriteLine("UriHostNameType");
+            return "done" + input;
+        }
+    }
+}

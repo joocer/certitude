@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `db_logging`.`t_audits`;
+CREATE TABLE  `db_logging`.`t_audits` (
+  `AuditID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `TimeStamp` datetime NOT NULL,
+  `SourceServer` varchar(32) NOT NULL,
+  `TraceID` varchar(32) NOT NULL,
+  `AuditData` text NOT NULL,
+  PRIMARY KEY (`AuditID`)
+) ENGINE=MyISAM;

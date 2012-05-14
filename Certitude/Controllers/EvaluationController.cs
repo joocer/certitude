@@ -18,7 +18,7 @@ namespace Certitude.Controllers
             List<string> results = new List<string>();
             
             IRule rule = new DataValueCheck(800);
-            string result = rule.Execute(traceID);
+            string result = rule.Execute(""); //TODO: this needs to send down the requested trace ID, not this requests traceID // );
             if (!string.IsNullOrEmpty(result))
             {
                 results.Add(result);

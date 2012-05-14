@@ -1,0 +1,11 @@
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `ce_events`.`sp_GetNotificationValue`$$
+CREATE DEFINER=`root`@`%` PROCEDURE  `ce_events`.`sp_GetNotificationValue`(IN ID CHAR(32))
+BEGIN
+  SELECT DataValue
+  FROM v_events
+  WHERE TraceID = ID;
+END $$
+
+DELIMITER ;

@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `db_logging`.`t_exceptions`;
+CREATE TABLE  `db_logging`.`t_exceptions` (
+  `ExceptionID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `TimeStamp` datetime NOT NULL,
+  `SourceServer` varchar(32) NOT NULL,
+  `ExceptionType` varchar(64) NOT NULL,
+  `TraceID` varchar(32) NOT NULL,
+  `ExceptionData` text NOT NULL,
+  PRIMARY KEY (`ExceptionID`)
+) ENGINE=MyISAM;
