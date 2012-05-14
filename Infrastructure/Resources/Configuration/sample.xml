@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <item key="host" value="192.168.1.14" encrypted="false" />
+  <item key="queue" value="ce.tasks" encrypted="false" />
+</configuration>
