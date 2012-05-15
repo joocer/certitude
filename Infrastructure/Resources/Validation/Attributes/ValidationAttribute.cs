@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Certitude.Services.Validation.Attributes
+namespace Infrastructure.Resources.Validation.Attributes
 {
     public abstract class ValidationAttribute : Attribute
     {

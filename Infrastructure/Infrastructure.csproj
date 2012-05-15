@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LZ4Sharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\LZ4Sharp.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.5.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.5.4\Assemblies\v4.0\MySql.Data.dll</HintPath>
@@ -58,12 +62,12 @@
     <Compile Include="Resources\Monitoring\IMonitorService.cs" />
     <Compile Include="Resources\Monitoring\MonitorProvider.cs" />
     <Compile Include="Resources\ResourceContainer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LZ4Sharp\LZ4Sharp.csproj">
-      <Project>{F234773A-FFD4-4964-AC20-7D890C29E9C2}</Project>
-      <Name>LZ4Sharp %28Infrastructure\LZ4Sharp\LZ4Sharp%29</Name>
-    </ProjectReference>
+    <Compile Include="Resources\Validation\Attributes\RequiredAttribute.cs" />
+    <Compile Include="Resources\Validation\Attributes\StringLengthAttribute.cs" />
+    <Compile Include="Resources\Validation\Attributes\ValidationAttribute.cs" />
+    <Compile Include="Resources\Validation\Attributes\WhiteListAttribute.cs" />
+    <Compile Include="Resources\Validation\IValidationService.cs" />
+    <Compile Include="Resources\Validation\ValidationAgent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Configuration\sample.xml.txt" />

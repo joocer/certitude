@@ -1,5 +1,5 @@
 ﻿using Certitude.Models;
-using Certitude.Services.Validation.Attributes;
+using Infrastructure.Resources.Validation.Attributes;
 
 namespace Certitude.Models
 {

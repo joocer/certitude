@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Certitude.Services.Validation.Attributes;
+using Infrastructure.Resources.Validation.Attributes;
 
-namespace Certitude.Services.Validation
+namespace Infrastructure.Resources.Validation
 {
     /// <summary>
     /// Validation via ValidationAttributes

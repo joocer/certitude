@@ -20,7 +20,7 @@ namespace Certitude.Controllers
             #region killer questions
             // validate
             IEnumerable<string> validationResults;
-            if (!ServiceFactory.ValidationService.Validate(model, out validationResults))
+            if (!ResourceContainer.Validation.Validate(model, out validationResults))
             {
                 actionResult = new ActionResultInvalidRequest(null, new InvalidRequestView(validationResults));
             }

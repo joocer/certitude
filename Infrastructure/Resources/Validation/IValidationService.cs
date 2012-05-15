@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Certitude.Services.Validation
+namespace Infrastructure.Resources.Validation
 {
     public interface IValidationService
     {

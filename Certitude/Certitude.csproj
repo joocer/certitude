@@ -74,15 +74,6 @@
     <Compile Include="Rules\IRule.cs" />
     <Compile Include="Services\Identity\IdentityAgent.cs" />
     <Compile Include="Services\Identity\IdentityService.cs" />
-    <Compile Include="Services\MapReduce\IMapReduceService.cs" />
-    <Compile Include="Services\MapReduce\MapReduceProxy.cs" />
-    <Compile Include="Services\ServiceFactory.cs" />
-    <Compile Include="Services\Validation\Attributes\RequiredAttribute.cs" />
-    <Compile Include="Services\Validation\Attributes\StringLengthAttribute.cs" />
-    <Compile Include="Services\Validation\Attributes\ValidationAttribute.cs" />
-    <Compile Include="Services\Validation\Attributes\WhiteListAttribute.cs" />
-    <Compile Include="Services\Validation\IValidationService.cs" />
-    <Compile Include="Services\Validation\ValidationAgent.cs" />
     <Compile Include="Views\FatalErrorView.cs" />
     <Compile Include="Views\InvalidRequestView.cs" />
     <Compile Include="Views\EvaluationView.cs" />
@@ -94,7 +85,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{473E5D14-EBFC-4AB3-ACB6-9CE6AEA68766}</Project>
-      <Name>Infrastructure %28Infrastructure\Infrastructure%29</Name>
+      <Name>Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

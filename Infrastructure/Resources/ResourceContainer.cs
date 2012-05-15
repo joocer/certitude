@@ -4,6 +4,7 @@ using Infrastructure.Resources.Configuration;
 using Infrastructure.Resources.Database;
 using Infrastructure.Resources.Logs;
 using Infrastructure.Resources.Monitoring;
+using Infrastructure.Resources.Validation;
 
 namespace Infrastructure.Resources
 {
@@ -17,6 +18,7 @@ namespace Infrastructure.Resources
             Database = new MySqlDatabaseResourceAgent();
             Logs = new DatabaseLoggingProvider();
             Monitor = new MonitorProvider();
+            Validation = new ValidationAgent();
         }
 
         public static IClockService Clock { get; set; }
@@ -30,6 +32,8 @@ namespace Infrastructure.Resources
         public static ILogsService Logs { get; set; }
 
         public static IMonitorService Monitor { get; set; }
+
+        public static IValidationService Validation { get; set; }
 
     }
 }

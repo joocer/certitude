@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Certitude.Services.Validation.Attributes
+namespace Infrastructure.Resources.Validation.Attributes
 {
-    class WhiteListAttribute : ValidationAttribute
+    public class WhiteListAttribute : ValidationAttribute
     {
         private readonly IEnumerable<string> _whitelist;
 

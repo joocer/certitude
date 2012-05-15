@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Certitude.Services.Validation.Attributes
+namespace Infrastructure.Resources.Validation.Attributes
 {
     public class StringLengthAttribute : ValidationAttribute
     {

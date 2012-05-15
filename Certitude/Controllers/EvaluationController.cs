@@ -15,10 +15,12 @@ namespace Certitude.Controllers
         /// <returns>ActionResult which then provides output back to caller</returns>
         protected override ActionResult DoService(IModel model, string traceID)
         {
+            EvaluationModel evaluationModel = (EvaluationModel)model;
+
             List<string> results = new List<string>();
             
             IRule rule = new DataValueCheck(800);
-            string result = rule.Execute(""); //TODO: this needs to send down the requested trace ID, not this requests traceID // );
+            string result = rule.Execute(evaluationModel.NotificationID);
             if (!string.IsNullOrEmpty(result))
             {
                 results.Add(result);
