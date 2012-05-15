@@ -24,13 +24,8 @@ namespace Certitude.Services.Identity
                 ResourceContainer.Database.ExecuteScalar("authorization",
                                                            "CALL sp_GetClientSecret('{0}')",
                                                            Identity) as byte[];
-
-            // if we don't have a response, fail
-            if (passwordBytes == null || passwordBytes.Length == 0)
-            {
-                return false;
-            }
-            string password = new UTF8Encoding().GetString(passwordBytes);
+            // convert to a string
+            string password = passwordBytes.AsString();
 
             // hash
             string hash = ComputeHash(Identity, password, new SHA256CryptoServiceProvider());

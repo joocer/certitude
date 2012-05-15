@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
-using Certitude.Results;
-using Certitude.Views;
 using Certitude.Models;
-using Certitude.Services;
+using Certitude.Results;
 using Certitude.Services.Identity;
+using Certitude.Views;
 using Infrastructure.Resources;
 
 namespace Certitude.Controllers

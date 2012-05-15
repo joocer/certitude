@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\DataValueCheck.cs" />
     <Compile Include="Rules\IRule.cs" />
+    <Compile Include="Services\Extensions.cs" />
     <Compile Include="Services\Identity\IdentityAgent.cs" />
     <Compile Include="Services\Identity\IdentityService.cs" />
     <Compile Include="Views\FatalErrorView.cs" />
