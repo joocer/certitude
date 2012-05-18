@@ -61,6 +61,7 @@
     <Compile Include="Resources\Database\MySqlDatabaseResourceAgent.cs" />
     <Compile Include="Resources\Monitoring\IMonitorService.cs" />
     <Compile Include="Resources\Monitoring\MonitorProvider.cs" />
+    <Compile Include="Resources\Validation\Attributes\RegularExpressionAttribute.cs" />
     <Compile Include="Resources\ResourceContainer.cs" />
     <Compile Include="Resources\Validation\Attributes\RequiredAttribute.cs" />
     <Compile Include="Resources\Validation\Attributes\StringLengthAttribute.cs" />

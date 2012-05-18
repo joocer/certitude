@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS `db_authorization`.`t_userroles`;
+CREATE TABLE  `db_authorization`.`t_userroles` (
+  `UserID` int(10) unsigned NOT NULL,
+  `RoleID` int(10) unsigned NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=binary;

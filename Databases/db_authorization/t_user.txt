@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `db_authorization`.`t_user`;
+CREATE TABLE  `db_authorization`.`t_user` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ClientID` int(10) unsigned NOT NULL,
+  `Username` varbinary(32) NOT NULL,
+  `Email` varbinary(255) NOT NULL,
+  `PasswordHash` varbinary(64) NOT NULL,
+  `Name` varbinary(255) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=binary;

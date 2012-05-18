@@ -23,9 +23,7 @@ namespace Certitude.Controllers
             {
                 actionResult = new ActionResultInvalidRequest(null, new InvalidRequestView(validationResults));
             }
-
-            // authenticate
-            if (actionResult == null && !identity.Authenticate(model.AuthenticationToken))
+            else if (!identity.Authenticate(model.AuthenticationToken))
             {
                 actionResult = new ActionResultNotAuthorized(null, new NotAuthorizedView());
             }
@@ -38,6 +36,7 @@ namespace Certitude.Controllers
                 {
                     actionResult = DoService(model, traceID);
                 }
+
             }
             catch (Exception exception)
             {

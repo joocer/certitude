@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using Certitude.Models;
 using Certitude.Results;
 using Certitude.Views;
-using Certitude.Models;
-using Certitude.Services;
 using Infrastructure.Resources;
 
 namespace Certitude.Controllers
@@ -20,19 +18,19 @@ namespace Certitude.Controllers
         {
             // execute a save on map/reduce engine, one per customer identifier
             ServiceResponse response = new ServiceResponse { Outcome = ServiceOutcomes.Success };
-
+            // timestamp should be the same for each event as part of the same notification
+            string timestamp = ResourceContainer.Clock.TimeStamp(ResourceContainer.Clock.Now()); 
             NotificationModel notification = (NotificationModel)model;
-            int records = 0;
 
             if (notification.SubjectIdentifiers.Any())
             {
                 foreach (string customer in notification.SubjectIdentifiers)
                 {
-                    records += ResourceContainer.Database
+                    ResourceContainer.Database
                        .ExecuteNonQuery(
                            "events",
                            "INSERT INTO t_events (TimeStamp, TraceID, ClientID, EventType, SubjectID, DataValue, DataType, DetectedBy) VALUES('{0}', UNHEX('{1}'), UNHEX('{2}'), '{3}', '{4}', '{5}', '{6}', UNHEX(CRC32('{7}')));",
-                           ResourceContainer.Clock.TimeStamp(ResourceContainer.Clock.Now()),
+                           timestamp,
                            traceID,
                            notification.ClientID,
                            notification.EventType,
@@ -45,11 +43,11 @@ namespace Certitude.Controllers
             }
             else
             {
-                records += ResourceContainer.Database
+                ResourceContainer.Database
                    .ExecuteNonQuery(
                        "events",
                        "INSERT INTO t_events (TimeStamp, TraceID, ClientID, EventType, SubjectID, DataValue, DataType, DetectedBy) VALUES('{0}', UNHEX('{1}'), UNHEX('{2}'), '{3}', '{4}', '{5}', '{6}', UNHEX(CRC32('{7}')));",
-                       ResourceContainer.Clock.TimeStamp(ResourceContainer.Clock.Now()),
+                       timestamp,
                        traceID,
                        notification.ClientID,
                        notification.EventType,
@@ -59,9 +57,6 @@ namespace Certitude.Controllers
                        notification.DetectedBy
                        );
             }
-
-
-            response.AddFlag(String.Format("{0} of {1} notifications created", records, notification.SubjectIdentifiers.Any() ? notification.SubjectIdentifiers.Count() : 1));
 
             if (response.Outcome == ServiceOutcomes.Failure)
             {

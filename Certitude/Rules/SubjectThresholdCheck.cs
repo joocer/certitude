@@ -5,32 +5,33 @@ using Infrastructure.Resources;
 namespace Certitude.Rules
 {
     // checks if the value of the notification exceeds a given value
-    class DataValueCheck : IRule
+    class EventThresholdCheck : Rule
     {
-        private readonly Single _value;
-
-        public DataValueCheck(Single value)
+        protected override RuleResult DoService(string notification)
         {
-            _value = value;
-        }
+            RuleResult ruleResult = new RuleResult(GetType().Name);
+            Single threshold;
 
-        public string Execute(string notification)
-        {
+            string thresholdString = GetParameter("event-threshold-value");
+            if (!Single.TryParse(thresholdString, out threshold))
+            {
+                return null;
+            }
+
             string sql = string.Format("SELECT DataValue FROM t_events WHERE TraceID = UNHEX('{0}') LIMIT 1", notification);
- 
             byte[] array = ResourceContainer.Database.ExecuteScalar("events", sql) as byte[];
             string value = array.AsString();
 
             Single s;
             if (Single.TryParse(value, out s))
             {
-                if (s >= _value)
+                if (s >= threshold)
                 {
-                    return String.Format("{0} failed - constant was {1}", GetType().Name, _value);
+                    ruleResult.Score = 1;
                 }   
             }
 
-            return string.Empty;
+            return ruleResult;
         }
     }
 }

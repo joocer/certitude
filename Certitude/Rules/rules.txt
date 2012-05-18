@@ -1,0 +1,21 @@
+﻿Volume based rules
+ 
+- Volume of event type/class per User ID per rolling time
+- Sum of Event Data per User ID per rolling time per event type/class
+- Volume of User ID per User ID per rolling time (e.g. IPs per username, usernames per IP)
+- Volume of user activity per rolling time per event type/class
+ 
+Behavior based rules
+ 
+- Volume of user activity per rolling time, compared to average user activity per user (1st/99th centile)
+- Time of day of user activity, compared to usual user activity
+- User ID is 1st or 99th centile in sign-in frequency (e.g. how unusual is one sign-in per day)
+- X number of event type/class recorded within rolling time of event type/class  (e.g. change of email address and change of phone number the day before a change of password)
+- First X characters of Event data not seen in last X days (e.g. sort code not used in last 12 months)
+- User behaviour changed when compared to previous block (e.g. chunk data into weekly/monthly/quarterly blocks and see if the behaviour this block is different to those blocks)
+ 
+Fixed rules
+ 
++ Value of individual payment per instance
+- Event type/class is X and event data is on black list/is not on white list
+- value in notification is within x meters of a given geographical point

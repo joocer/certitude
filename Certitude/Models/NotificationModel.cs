@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
 using Infrastructure.Resources.Validation.Attributes;
 
 namespace Certitude.Models
@@ -13,19 +11,19 @@ namespace Certitude.Models
         #region properties
 
         [Required(true)]
-        [StringLength(32)]
-        public string ClientID { get; set; }
+        [RegularExpression("^[\\da-fA-F]{64}$")] // hex string
+        public string AuthenticationToken { get; set; }
 
         [Required(true)]
-        [StringLength(64)]
-        public string AuthenticationToken { get; set; }
+        [RegularExpression("^[\\da-fA-F]{32}$")] // hex string
+        public string ClientID { get; set; }
 
         [Required(true)]
         [StringLength(1, 32)]
         public string DetectedBy { get; set; }
 
         [Required(true)]
-        [StringLength(1,32)]
+        [StringLength(1,16)]
         public string EventType { get; set; }
 
         [Required(false)]
@@ -33,7 +31,7 @@ namespace Certitude.Models
         public IEnumerable<string> SubjectIdentifiers { get; set; }
 
         [Required(false)]
-        [StringLength(0,32)]
+        [StringLength(0,16)]
         public string DataValue { get; set; }
 
         [Required(false)]

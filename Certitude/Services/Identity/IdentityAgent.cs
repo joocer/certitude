@@ -41,7 +41,7 @@ namespace Certitude.Services.Identity
         /// <param name="password">Client Password</param>
         /// <param name="algorithm">Any HashAlgorithm</param>
         /// <returns></returns>
-        public static string ComputeHash(string clientID, string password, HashAlgorithm algorithm)
+        private static string ComputeHash(string clientID, string password, HashAlgorithm algorithm)
         {
             Byte[] clientIDBytes = Encoding.Unicode.GetBytes(clientID);
             Byte[] passwordBytes = Encoding.Unicode.GetBytes(password);

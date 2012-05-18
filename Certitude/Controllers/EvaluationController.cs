@@ -17,14 +17,13 @@ namespace Certitude.Controllers
         {
             EvaluationModel evaluationModel = (EvaluationModel)model;
 
-            List<string> results = new List<string>();
+            List<RuleResult> results = new List<RuleResult>();
+
+            Dictionary<string,string> config = new Dictionary<string, string>();
+            config.Add("event-threshold-value", "800");
             
-            IRule rule = new DataValueCheck(800);
-            string result = rule.Execute(evaluationModel.NotificationID);
-            if (!string.IsNullOrEmpty(result))
-            {
-                results.Add(result);
-            }
+            IRule rule = new EventThresholdCheck();
+            results.Add(rule.Execute(evaluationModel.NotificationID, null));
 
             // return the result
             return new ActionResultDisplayEvaluation(model, new EvaluationView(results));

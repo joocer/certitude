@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS `db_authorization`.`t_role`;
+CREATE TABLE  `db_authorization`.`t_role` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Role` varchar(45) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=binary;

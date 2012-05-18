@@ -2,16 +2,17 @@
 using System.Text;
 using System.Xml;
 using Certitude.Models;
+using Certitude.Rules;
 
 namespace Certitude.Views
 {
     public class EvaluationView : IView
     {
-        private readonly IEnumerable<string> _flags;
+        private readonly IEnumerable<RuleResult> _results;
 
-        public EvaluationView(IEnumerable<string> flags)
+        public EvaluationView(IEnumerable<RuleResult> results)
         {
-            _flags = flags;
+            _results = results;
         }
 
         public string Serialize(IModel model)
@@ -28,8 +29,14 @@ namespace Certitude.Views
             xmlWriter.WriteStartElement("evaluation");
             xmlWriter.WriteAttributeString("notification", localModel.NotificationID);
 
-            xmlWriter.WriteStartElement("flags");
-            xmlWriter.WriteRaw(ViewHelpers.FlagWriter(_flags));
+            xmlWriter.WriteStartElement("results");
+            foreach (RuleResult result in _results)
+            {
+                if (result != null)
+                {
+                    xmlWriter.WriteRaw(result.ToXml());
+                }
+            }
             xmlWriter.WriteEndElement();
 
             xmlWriter.WriteEndElement();

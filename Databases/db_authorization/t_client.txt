@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS `db_authorization`.`t_client`;
+CREATE TABLE  `db_authorization`.`t_client` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `GUID` char(32) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=binary;
