@@ -23,7 +23,7 @@ namespace Certitude.Controllers
             config.Add("event-threshold-value", "800");
             
             IRule rule = new EventThresholdCheck();
-            results.Add(rule.Execute(evaluationModel.NotificationID, null));
+            results.Add(rule.Execute(evaluationModel.NotificationID, config));
 
             // return the result
             return new ActionResultDisplayEvaluation(model, new EvaluationView(results));

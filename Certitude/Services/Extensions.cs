@@ -25,12 +25,20 @@ namespace Certitude.Services
         // lifted from : http://stackoverflow.com/questions/240258/removing-trailing-nulls-from-byte-array-in-c-sharp
         public static byte[] Trim(this byte[] array)
         {
-            int i = array.Length - 1;
-            while (array[i] == 0)
-                --i;
+            byte[] result;
 
-            byte[] result = new byte[i + 1];
-            Array.Copy(array, result, i + 1);
+            try
+            {
+                int i = array.Length - 1;
+                while (array[i] == 0)
+                    --i;
+                result = new byte[i + 1];
+                Array.Copy(array, result, i + 1);
+            }
+            catch
+            {
+                result = new byte[0];
+            }
 
             return result;
         }
