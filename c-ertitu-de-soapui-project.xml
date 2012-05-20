@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="c.ertitu.de" resourceRoot="" soapui-version="4.0.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="NotificationServicesSoap12" type="wsdl" bindingName="{http://c.ertitu.de/}NotificationServicesSoap12" soapVersion="1_2" anonymous="optional" definition="http://localhost:10482/API/NotificationServices.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:10482/API/NotificationServices.asmx?WSDL"><con:part><con:url>http://localhost:10482/API/NotificationServices.asmx?WSDL</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://c.ertitu.de/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://c.ertitu.de/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://c.ertitu.de/">
+      <s:element name="Notify">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="clientID" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationKey" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="eventType" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="detectedBy" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="subjectIdentifiers" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="dataValue" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="dataType" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NotifyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any/>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Evaluate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="clientID" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationKey" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="notificationID" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EvaluateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EvaluateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any/>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="NotifySoapIn">
+    <wsdl:part name="parameters" element="tns:Notify"/>
+  </wsdl:message>
+  <wsdl:message name="NotifySoapOut">
+    <wsdl:part name="parameters" element="tns:NotifyResponse"/>
+  </wsdl:message>
+  <wsdl:message name="EvaluateSoapIn">
+    <wsdl:part name="parameters" element="tns:Evaluate"/>
+  </wsdl:message>
+  <wsdl:message name="EvaluateSoapOut">
+    <wsdl:part name="parameters" element="tns:EvaluateResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="NotificationServicesSoap">
+    <wsdl:operation name="Notify">
+      <wsdl:input message="tns:NotifySoapIn"/>
+      <wsdl:output message="tns:NotifySoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="Evaluate">
+      <wsdl:input message="tns:EvaluateSoapIn"/>
+      <wsdl:output message="tns:EvaluateSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NotificationServicesSoap" type="tns:NotificationServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Notify">
+      <soap:operation soapAction="http://c.ertitu.de/Notify" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Evaluate">
+      <soap:operation soapAction="http://c.ertitu.de/Evaluate" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NotificationServicesSoap12" type="tns:NotificationServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Notify">
+      <soap12:operation soapAction="http://c.ertitu.de/Notify" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Evaluate">
+      <soap12:operation soapAction="http://c.ertitu.de/Evaluate" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NotificationServices">
+    <wsdl:port name="NotificationServicesSoap" binding="tns:NotificationServicesSoap">
+      <soap:address location="http://localhost:10482/API/NotificationServices.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="NotificationServicesSoap12" binding="tns:NotificationServicesSoap12">
+      <soap12:address location="http://localhost:10482/API/NotificationServices.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:10482/API/NotificationServices.asmx</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://c.ertitu.de/Evaluate" name="Evaluate" bindingOperationName="Evaluate" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10482/API/NotificationServices.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:c="http://c.ertitu.de/">
+   <soap:Header/>
+   <soap:Body>
+      <c:Evaluate>
+         <!--Optional:-->
+         <c:clientID>?</c:clientID>
+         <!--Optional:-->
+         <c:authenticationKey>?</c:authenticationKey>
+         <!--Optional:-->
+         <c:notificationID>?</c:notificationID>
+      </c:Evaluate>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://c.ertitu.de/NotificationServicesSoap/EvaluateRequest"/></con:call></con:operation><con:operation isOneWay="false" action="http://c.ertitu.de/Notify" name="Notify" bindingOperationName="Notify" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10482/API/NotificationServices.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:c="http://c.ertitu.de/">
+   <soap:Header/>
+   <soap:Body>
+      <c:Notify>
+         <!--Optional:-->
+         <c:clientID>?</c:clientID>
+         <!--Optional:-->
+         <c:authenticationKey>?</c:authenticationKey>
+         <!--Optional:-->
+         <c:eventType>?</c:eventType>
+         <!--Optional:-->
+         <c:detectedBy>?</c:detectedBy>
+         <!--Optional:-->
+         <c:subjectIdentifiers>?</c:subjectIdentifiers>
+         <!--Optional:-->
+         <c:dataValue>?</c:dataValue>
+         <!--Optional:-->
+         <c:dataType>?</c:dataType>
+      </c:Notify>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://c.ertitu.de/NotificationServicesSoap/NotifyRequest"/></con:call></con:operation></con:interface><con:testSuite name="NotificationServicesSoap12 TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Notify TestCase" searchProperties="true" id="669530e3-8753-43b5-8937-ba8ff0f71b98"><con:settings/><con:testStep type="request" name="Notify"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>NotificationServicesSoap12</con:interface><con:operation>Notify</con:operation><con:request name="Notify"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10482/API/NotificationServices.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:c="http://c.ertitu.de/">
+   <soap:Header/>
+   <soap:Body>
+      <c:Notify>
+         <!--Optional:-->
+         <c:clientID>12345678901234567890123456789012</c:clientID>
+         <!--Optional:-->
+         <c:authenticationKey>6DB9FD34011AFFAEBA86F9D4C15611F985B4E28A80B65F308697DC003DF7751D</c:authenticationKey>
+         <!--Optional:-->
+         <c:eventType>update-username</c:eventType>
+         <!--Optional:-->
+         <c:detectedBy>soapui</c:detectedBy>
+         <!--Optional:-->
+         <c:subjectIdentifiers>justin.joyce@joocer.com,K27160</c:subjectIdentifiers>
+         <!--Optional:-->
+         <c:dataValue></c:dataValue>
+         <!--Optional:-->
+         <c:dataType></c:dataType>
+      </c:Notify>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://c.ertitu.de/NotificationServicesSoap/NotifyRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Evaluate"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>NotificationServicesSoap12</con:interface><con:operation>Evaluate</con:operation><con:request name="Evaluate"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10482/API/NotificationServices.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:c="http://c.ertitu.de/">
+   <soap:Header/>
+   <soap:Body>
+      <c:Evaluate>
+         <!--Optional:-->
+         <c:clientID>12345678901234567890123456789012</c:clientID>
+         <!--Optional:-->
+         <c:authenticationKey>6DB9FD34011AFFAEBA86F9D4C15611F985B4E28A80B65F308697DC003DF7751D</c:authenticationKey>
+         <!--Optional:-->
+         <c:notificationID>8fc10be2e04e408bbc25c21674f21485</c:notificationID>
+      </c:Evaluate>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://c.ertitu.de/NotificationServicesSoap/EvaluateRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>50</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>1000</con:testLimit><con:limitType>COUNT_PER_THREAD</con:limitType><con:loadStrategy><con:type>Simple</con:type><con:config><testDelay>250</testDelay><randomFactor>0.5</randomFactor></con:config></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/></con:soapui-project>
