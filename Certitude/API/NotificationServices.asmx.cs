@@ -3,8 +3,6 @@ using System.Xml;
 using Certitude.Controllers;
 using Certitude.Models;
 using Certitude.Results;
-using Certitude.Models;
-using Certitude.Services;
 using Certitude.Services.Identity;
 using Infrastructure.Resources;
 

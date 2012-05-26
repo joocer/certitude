@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace Infrastructure.Resources.Configuration
@@ -8,9 +9,17 @@ namespace Infrastructure.Resources.Configuration
     {
         private const string ValueXPath = "/configuration/item[@key=\"{0}\"]/@value";
         private const string EncryptedXPath = "/configuration/item[@key='{0}']/@encrypted";
+        private string _configPath;
 
         // Reading the config is expensive, cache reads 
         private static readonly IDictionary<int, string> ConfigCache = new Dictionary<int, string>();
+
+        public XmlConfigurationProvider() { }
+
+        public XmlConfigurationProvider(string configPath)
+        {
+            _configPath = configPath;
+        }
 
         public string ReadValue(string section, string key)
         {
@@ -26,7 +35,8 @@ namespace Infrastructure.Resources.Configuration
             #region read xml cache file
             // read the file from config
             XmlDocument document = new XmlDocument();
-            document.Load(@"config\" + section + ".xml");
+            string filename =Path.Combine(_configPath, "config", section + ".xml");
+            document.Load(filename);
 
             // this is the payload data
             XmlNode valueNode = document.SelectSingleNode(String.Format(ValueXPath, key));

@@ -30,6 +30,5 @@ namespace Certitude.Rules
             return null;
         }
 
-
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Certitude.API;
-using Certitude.API;
 using Certitude.Models;
 
 namespace Certitude.Views

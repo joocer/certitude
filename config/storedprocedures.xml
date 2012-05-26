@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <item key="compare-event-value" value="SELECT DataValue FROM t_events WHERE TraceID = UNHEX('{0}') LIMIT 1" encrypted="false" />
+</configuration>

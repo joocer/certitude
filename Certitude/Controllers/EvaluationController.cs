@@ -3,6 +3,7 @@ using Certitude.Results;
 using Certitude.Rules;
 using Certitude.Views;
 using Certitude.Models;
+using Infrastructure.Resources.Configuration;
 
 namespace Certitude.Controllers
 {
@@ -19,11 +20,13 @@ namespace Certitude.Controllers
 
             List<RuleResult> results = new List<RuleResult>();
 
-            Dictionary<string,string> config = new Dictionary<string, string>();
-            config.Add("event-threshold-value", "800");
-            
-            IRule rule = new EventThresholdCheck();
-            results.Add(rule.Execute(evaluationModel.NotificationID, config));
+            XmlConfigurationProvider configuration = new XmlConfigurationProvider(@"D:\Code\Certitude\");
+
+            Dictionary<string,string> parameters = new Dictionary<string, string>();
+            parameters.Add("compare-event-value-value", "800");
+
+            IRule rule = new SimpleCompareRule("compare-event-value", configuration);
+            results.Add(rule.Execute(evaluationModel.NotificationID, parameters));
 
             // return the result
             return new ActionResultDisplayEvaluation(model, new EvaluationView(results));
