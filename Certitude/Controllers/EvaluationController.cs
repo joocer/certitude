@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Certitude.Results;
 using Certitude.Rules;
+using Certitude.Rules.Definitions;
 using Certitude.Views;
 using Certitude.Models;
 using Infrastructure.Resources.Configuration;
@@ -20,13 +21,13 @@ namespace Certitude.Controllers
 
             List<RuleResult> results = new List<RuleResult>();
 
-            XmlConfigurationProvider configuration = new XmlConfigurationProvider(@"D:\Code\Certitude\");
+            //XmlConfigurationProvider configuration = new XmlConfigurationProvider(@"D:\Code\Certitude\");
 
-            Dictionary<string,string> parameters = new Dictionary<string, string>();
-            parameters.Add("compare-event-value-value", "800");
+            //Dictionary<string,string> parameters = new Dictionary<string, string>();
+            //parameters.Add("compare-event-value-value", "800");
 
-            IRule rule = new SimpleCompareRule("compare-event-value", configuration);
-            results.Add(rule.Execute(evaluationModel.NotificationID, parameters));
+            //IRule rule = new TotalEvents();
+            //results.Add(rule.Execute(evaluationModel.NotificationID, parameters));
 
             // return the result
             return new ActionResultDisplayEvaluation(model, new EvaluationView(results));

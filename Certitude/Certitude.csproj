@@ -50,6 +50,19 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Rules\Aggregators\Average.cs" />
+    <Compile Include="Rules\Aggregators\Count.cs" />
+    <Compile Include="Rules\Aggregators\Distance.cs" />
+    <Compile Include="Rules\Aggregators\Earliest.cs" />
+    <Compile Include="Rules\Aggregators\EventAggregator.cs" />
+    <Compile Include="Rules\Aggregators\Latest.cs" />
+    <Compile Include="Rules\Aggregators\Maximum.cs" />
+    <Compile Include="Rules\Aggregators\Minimum.cs" />
+    <Compile Include="Rules\Aggregators\Speed.cs" />
+    <Compile Include="Rules\Aggregators\Sum.cs" />
+    <Compile Include="Rules\Aggregators\TimeDifference.cs" />
+    <Compile Include="Rules\Aggregators\Value.cs" />
+    <Compile Include="Rules\Aggregators\Variance.cs" />
     <Compile Include="API\Helpers.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\EvaluationController.cs" />
@@ -71,9 +84,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\RuleExecutionException.cs" />
-    <Compile Include="Rules\SimpleCompareRule.cs" />
-    <Compile Include="Rules\SubjectThresholdCheck.cs" />
+    <Compile Include="Exceptions\RuleExecutionException.cs" />
+    <Compile Include="Rules\Definitions\TotalEvents.cs" />
     <Compile Include="Rules\IRule.cs" />
     <Compile Include="Rules\Rule.cs" />
     <Compile Include="Rules\RuleResult.cs" />

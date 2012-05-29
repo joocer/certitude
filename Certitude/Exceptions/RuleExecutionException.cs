@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Certitude.Rules
+namespace Certitude.Exceptions
 {
     public class RuleExecutionException : Exception
     {

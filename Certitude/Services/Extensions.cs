@@ -19,11 +19,11 @@ namespace Certitude.Services
             {
                 return string.Empty;
             }
-            return Encoding.GetString(array.Trim());
+            return Encoding.GetString(array).Trim('\0');
         }
 
         // lifted from : http://stackoverflow.com/questions/240258/removing-trailing-nulls-from-byte-array-in-c-sharp
-        public static byte[] Trim(this byte[] array)
+        public static byte[] TrimArray(this byte[] array)
         {
             byte[] result;
 

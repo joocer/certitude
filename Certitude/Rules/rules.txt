@@ -16,6 +16,6 @@ Behavior based rules
  
 Fixed rules
  
-+ Value of individual payment per instance
+- Value of individual payment per instance
 - Event type/class is X and event data is on black list/is not on white list
 - value in notification is within x meters of a given geographical point
