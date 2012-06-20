@@ -16,44 +16,30 @@ namespace Certitude.Services.Identity
 
         public override bool Authenticate(string authenticationKey)
         {
-            // this works by retrieving the client's password from the database we do a SHA256 hash 
-            // on clientID + password to see if it matches the authenticationKey
+            // fetch the salt from the database
+            var saltBytes = ResourceContainer.Database.ExecuteScalar("authorization",
+                "CALL sp_GetClientSalt('{0}')",
+                Identity) as byte[];
+            string salt = saltBytes.AsString();
 
             // get the password from the database
-            var passwordBytes =
-                ResourceContainer.Database.ExecuteScalar("authorization",
-                                                           "CALL sp_GetClientSecret('{0}')",
-                                                           Identity) as byte[];
-            // convert to a string
-            string password = passwordBytes.AsString();
+            var secretBytes = ResourceContainer.Database.ExecuteScalar("authorization",
+                "CALL sp_GetClientSecret('{0}')",
+                Identity) as byte[];
+            string secret = secretBytes.AsString();
 
-            // hash
-            string hash = ComputeHash(Identity, password, new SHA256CryptoServiceProvider());
-
-            // does the hash match the key?
-            return authenticationKey == hash;
+            // check the password
+            return ResourceContainer.Hashing.CheckPassword(authenticationKey, secret, salt);
         }
 
-        /// <summary>
-        /// Combine and Hash
-        /// </summary>
-        /// <param name="clientID">Unique Client Reference</param>
-        /// <param name="password">Client Password</param>
-        /// <param name="algorithm">Any HashAlgorithm</param>
-        /// <returns></returns>
-        private static string ComputeHash(string clientID, string password, HashAlgorithm algorithm)
+        public override void CreateCredentials(string password)
         {
-            Byte[] clientIDBytes = Encoding.Unicode.GetBytes(clientID);
-            Byte[] passwordBytes = Encoding.Unicode.GetBytes(password);
+            string salt = ResourceContainer.Hashing.GenerateSalt();
+            string hash = ResourceContainer.Hashing.HashPassword(password, salt);
 
-            // Combine salt and input bytes
-            Byte[] combinedInput = new Byte[passwordBytes.Length + clientIDBytes.Length];
-            passwordBytes.CopyTo(combinedInput, 0);
-            clientIDBytes.CopyTo(combinedInput, passwordBytes.Length);
-
-            // hash and return the result
-            Byte[] hashedBytes = algorithm.ComputeHash(combinedInput);
-            return BitConverter.ToString(hashedBytes).Replace("-", "");
+            ResourceContainer.Database.ExecuteNonQuery("authorization",
+                "CALL sp_CreateClientSecret('{0}', '{1}', '{2}')",
+                Identity, hash, salt);
         }
     }
 }

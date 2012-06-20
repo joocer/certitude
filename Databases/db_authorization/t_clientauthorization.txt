@@ -2,5 +2,6 @@ DROP TABLE IF EXISTS `db_authorization`.`t_clientauthorization`;
 CREATE TABLE  `db_authorization`.`t_clientauthorization` (
   `ID` int(10) unsigned NOT NULL,
   `Secret` varbinary(64) NOT NULL,
+  `Salt` varbinary(32) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=binary;

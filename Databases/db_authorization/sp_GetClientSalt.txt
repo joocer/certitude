@@ -1,0 +1,16 @@
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `db_authorization`.`sp_GetClientSalt` $$
+CREATE PROCEDURE `db_authorization`.`sp_GetClientSalt` (IN ID CHAR(32))
+BEGIN
+
+SELECT    Salt
+FROM      t_client,
+          t_clientauthorization
+WHERE     t_clientauthorization.ID = t_client.ID
+  AND     GUID = ID;
+
+
+END $$
+
+DELIMITER ;

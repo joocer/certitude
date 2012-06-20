@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net">
+      <HintPath>..\packages\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="LZ4Sharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\LZ4Sharp.dll</HintPath>
@@ -50,6 +53,8 @@
     <Compile Include="Resources\Clock\ClockProvider.cs" />
     <Compile Include="Resources\Compression\ICompressionService.cs" />
     <Compile Include="Resources\Compression\LZ4CompressionProvider.cs" />
+    <Compile Include="Resources\Hashing\BCryptHashingProvider.cs" />
+    <Compile Include="Resources\Hashing\IHashingService.cs" />
     <Compile Include="Resources\Logs\DatabaseLoggingProvider.cs" />
     <Compile Include="Resources\Logs\EventLogLoggingProvider.cs" />
     <Compile Include="Resources\Logs\ILogsService.cs" />
